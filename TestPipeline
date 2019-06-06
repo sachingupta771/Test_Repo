@@ -1,0 +1,9 @@
+#!groovy
+@Library('Pipeline_as_code_Library@master') _
+node('Slave2'){
+ TestPipeline {
+   GIT_URL             = 'https://github.com/sachingupta771/Scripted_pipeline_as_code.git'
+   GIT_CREDENTIALS     = 'GITHUB'
+   
+  }
+}
