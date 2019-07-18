@@ -1,0 +1,21 @@
+node {
+   def GIT_URL
+   def CREDS
+   stage('Preparation') { 
+		script {
+			echo "preparing for pipeline";
+			GIT_URL='https://github.com/sachingupta771/headfund.git'
+			CREDS = 'GITHUB'
+			def Branch = 'paas'
+		}
+	}
+    stage('Checkout') {
+			script {
+				echo 'Taking Checkout of Application Repo ';
+				checkout([$class: 'GitSCM', branches: [[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${CREDS}", url: "${GIT_URL}"]]]) 
+				
+		    }
+		
+	}
+ 
+}
