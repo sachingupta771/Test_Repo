@@ -12,13 +12,13 @@ node {
         script {
             def Branch = params.Branch
             def Application = params.Application
-            if ( Application == "Party") 
+            if ( ${Application} == "Party") 
                 {
-                GIT_URL='https://github.com/sachingupta771/party.git'
+                ${GIT_URL}='https://github.com/sachingupta771/party.git'
                 }
-            else if ( Application == "HeadFund") 
+            else if ( ${Application} == "HeadFund") 
                 {
-                GIT_URL='https://github.com/sachingupta771/headfund.git'
+                ${GIT_URL}='https://github.com/sachingupta771/headfund.git'
                 }
             echo "${Application}";
             echo "${Branch} ,at url: ${GIT_URL}";
