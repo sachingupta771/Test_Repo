@@ -20,7 +20,7 @@ node {
     stage('Checkout') {
         script {
             def Branch = params.Branch
-            echo Branch
+            echo Branch ,at url: ${GIT_URL};
             echo 'Taking Checkout of Application Repo ';
             checkout([$class: 'GitSCM', branches: [[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${CREDS}", url: "${GIT_URL}"]]]) 
         }
