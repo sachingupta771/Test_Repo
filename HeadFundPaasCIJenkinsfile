@@ -1,12 +1,13 @@
 node {
    def GIT_URL
    def CREDS
+   def Branch
    stage('Preparation') { 
         script {
             echo "preparing for pipeline";
             GIT_URL='https://github.com/sachingupta771/headfund.git'
             CREDS = 'GITHUB'
-            def Branch = 'paas'
+            Branch = 'paas'
         }
     }
     stage('Checkout') {
