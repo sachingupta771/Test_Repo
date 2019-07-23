@@ -5,8 +5,13 @@ node {
         script {
             echo "preparing for pipeline";
             CREDS = 'GITHUB'
+           
+        }
+    }
+    stage('Checkout') {
+        script {
+            def Branch = params.Branch
             def Application = params.Application
-            echo Application
             if ( Application == "Party") 
                 {
                 env.GIT_URL='https://github.com/sachingupta771/party.git'
@@ -15,12 +20,8 @@ node {
                 {
                 env.GIT_URL='https://github.com/sachingupta771/headfund.git'
                 }
-        }
-    }
-    stage('Checkout') {
-        script {
-            def Branch = params.Branch
-            echo "Branch ,at url: ${env.GIT_URL}";
+            echo ${Application}
+            echo "${Branch} ,at url: ${env.GIT_URL}";
             echo 'Taking Checkout of Application Repo ';
             checkout([$class: 'GitSCM', branches: [[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${CREDS}", url: "${env.GIT_URL}"]]]) 
         }
