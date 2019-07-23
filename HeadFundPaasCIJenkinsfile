@@ -7,7 +7,7 @@ node {
             echo "preparing for pipeline";
             GIT_URL='https://github.com/sachingupta771/headfund.git'
             CREDS = 'GITHUB'
-            Branch = 'paas'
+            Branch = 'pass'
         }
     }
     stage('Checkout') {
