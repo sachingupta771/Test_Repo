@@ -14,16 +14,16 @@ node {
             def Application = params.Application
             if ( Application == "Party") 
                 {
-                env.GIT_URL='https://github.com/sachingupta771/party.git'
+                GIT_URL='https://github.com/sachingupta771/party.git'
                 }
             else if ( Application == "HeadFund") 
                 {
-                env.GIT_URL='https://github.com/sachingupta771/headfund.git'
+                GIT_URL='https://github.com/sachingupta771/headfund.git'
                 }
-            echo ${Application}
-            echo "${Branch} ,at url: ${env.GIT_URL}";
+            echo "${Application}";
+            echo "${Branch} ,at url: ${GIT_URL}";
             echo 'Taking Checkout of Application Repo ';
-            checkout([$class: 'GitSCM', branches: [[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${CREDS}", url: "${env.GIT_URL}"]]]) 
+            checkout([$class: 'GitSCM', branches: [[name: Branch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${CREDS}", url: "${GIT_URL}"]]]) 
         }
     }
 }
