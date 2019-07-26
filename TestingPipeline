@@ -1,0 +1,83 @@
+node {
+   def GIT_URL
+   def CREDS
+   
+   stage('Preparation') { 
+        script {
+            echo "preparing for pipeline, Seeting up the Env Vars";
+            GIT_URL=' '
+            CREDS = ' '
+            def Branch = ' '
+        }
+    }
+       stage('Checkout DB') { 
+        script {
+            echo "Checking out the DB";
+        }
+    }   
+    stage('CheckMarx') { 
+        script {
+            echo "Running the checkmarx";
+        }
+    }   
+    stage('Pre-Checks') { 
+        script {
+            echo "Running the Pre-Checks";
+        }
+    }   
+    stage('Sonar') { 
+        script {
+            echo "Running the Sonar";
+        }
+    }   
+    stage('SonarLogs') { 
+        script {
+            echo "Fetching the Sonar Logs";
+       }
+    }   
+        stage('SonarThreshold') { 
+        script {
+            echo "Checking the sonar threshold";
+        }
+    }
+    stage('Preparation') { 
+        script {
+            echo "preparing for pipeline, Seeting up the Env Vars";
+            GIT_URL=' '
+            CREDS = ' '
+            def Branch = ' '
+        }
+    }
+    stage('Version') {
+            script {
+                echo "Running the version.bat";
+                sh """
+            #   #!/usr/bin/perl version.pl
+                """
+            }
+    }
+    stage('Snapshot') {
+            script {
+                echo "Creating Snapshot.json";
+                sh """
+            #   Snapshot.bat
+                """
+            }
+    }
+    stage('DeploySnapshot') {
+            script {
+                echo "Creating DeploySnapshot.json";
+                sh """
+            #   #!/usr/bin/perl deploysnapshot.pl
+                """
+            }
+    }
+    stage('Deployment Status') {
+            script {
+                echo "Checking the Deployment Status";
+                sh """
+        #       #!/usr/bin/perl requestid.pl
+                """
+            }
+    }
+}
