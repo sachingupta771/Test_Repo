@@ -1,0 +1,141 @@
+
+
+import java.io.*
+import java.util.*
+
+     def STAGES=["Preparation","Checkout DB"]
+     if (env.CheckMarx == "true") {
+       STAGES.add("CheckMarx")
+     }
+     
+    STAGES.add("Pre-Checks");
+    
+     if (env.Sonar == "true") {
+       STAGES.add("Sonar")
+     }
+    if (env.SonarLogs == "true") {
+       STAGES.add("SonarLogs")
+     }
+     if (env.SonarThreshold == "true") {
+       STAGES.add("SonarThreshold")
+     }
+     
+       STAGES.addAll("Preparation", "Version", "Snapshot")
+       
+     if (env.DeploySnapshot == "true") {
+       STAGES.add("DeploySnapshot")
+    }
+     if (env.DeploymentStatus == "true") {
+       STAGES.add("DeploymentStatus")
+    }
+    
+  node{
+     for (item in STAGES) {
+        switch(item) {
+          case 'Preparation':
+            stage('Preparation') { 
+                script {
+                    echo "preparing for pipeline, Seeting up the Env Vars";
+                    GIT_URL=' '
+                    CREDS = ' '
+                    def Branch = ' '
+                }
+            }
+            break
+          case 'Checkout DB':
+           stage('Checkout DB') { 
+                script {
+                    echo "Checking out the DB";
+                }
+            }   
+            break
+          case 'CheckMarx':
+            stage('CheckMarx') { 
+                script {
+                    echo "Running the checkmarx";
+                }
+            }   
+            break
+          case 'Pre-Checks':
+            stage('Pre-Checks') { 
+                script {
+                    echo "Running the Pre-Checks";
+                }
+            }   
+            break
+          case 'Sonar':
+            stage('Sonar') { 
+                script {
+                    echo "Running the Sonar";
+                }
+            }   
+            break
+          case 'SonarLogs':
+            stage('SonarLogs') { 
+                script {
+                    echo "Fetching the Sonar Logs";
+                }
+            }  
+            break
+          case 'SonarThreshold':
+            stage('SonarThreshold') { 
+                script {
+                    echo "Checking the sonar threshold";
+                }
+            }
+            break
+            case 'Preparation':
+            stage('Preparation') { 
+                script {
+                    echo "preparing for pipeline, Seeting up the Env Vars";
+                    GIT_URL=' '
+                    CREDS = ' '
+                    def Branch = ' '
+                }
+            }
+            break
+            case 'Version':
+            stage('Version') {
+                script {
+                    echo "Running the version.bat";
+                    sh """
+                        #   #!/usr/bin/perl version.pl
+                    """
+                }
+            }
+            break
+            case 'Snapshot':
+            stage('Snapshot') {
+                script {
+                    echo "Creating Snapshot.json";
+                    sh """
+                        #   Snapshot.bat
+                    """
+                }
+            }
+            break
+            case 'DeploySnapshot':
+            stage('DeploySnapshot') {
+                script {
+                    echo "Creating DeploySnapshot.json";
+                    sh """
+                        #   #!/usr/bin/perl deploysnapshot.pl
+                    """
+                }
+            }
+            break
+            case 'DeploymentStatus':
+            stage('DeploymentStatus') {
+                script {
+                    echo "Checking the Deployment Status";
+                    sh """
+                        #       #!/usr/bin/perl requestid.pl
+                    """
+                }
+            }
+            break
+                
+        }
+     }
+  }
+  
