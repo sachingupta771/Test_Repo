@@ -29,7 +29,7 @@ import java.util.*
        STAGES.add("DeploymentStatus")
     }
     
-  node{
+  node("SLAVE1"){
      for (item in STAGES) {
         switch(item) {
           case 'Preparation':
