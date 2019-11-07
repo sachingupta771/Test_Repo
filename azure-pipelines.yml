@@ -25,11 +25,11 @@ steps:
     echo This multiline script always runs in Bash.
     echo Even on Windows machines!
 
-- stage: Build
-  variables:    # stage-level
+
+variables:    # stage-level
     STAGE_VAR: 'that happened'
 
-  jobs:
+jobs:
   - job: FirstJob
     variables:  # job-level
       JOB_VAR: 'a job var'
