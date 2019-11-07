@@ -12,6 +12,8 @@ pool:
 variables:      # pipeline-level
   MY_VAR: 'my value'
   ANOTHER_VAR: 'another value'
+  STAGE_VAR: 'that happened'
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -26,8 +28,7 @@ steps:
     echo Even on Windows machines!
 
 
-variables:    # stage-level
-    STAGE_VAR: 'that happened'
+
 
 jobs:
   - job: FirstJob
