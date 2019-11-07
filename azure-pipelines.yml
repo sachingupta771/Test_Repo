@@ -10,9 +10,10 @@ pool:
   vmImage: 'ubuntu-latest'
   
 variables:      # pipeline-level
-  MY_VAR: 'my value'
+  MY_VAR: 'my var'
   ANOTHER_VAR: 'another value'
-  STAGE_VAR: 'that happened'
+  STAGE_VAR: 'Stage var'
+  JOB_VAR: 'a job var'
 
 steps:
 - script: echo Hello, world!
@@ -27,12 +28,4 @@ steps:
     echo This multiline script always runs in Bash.
     echo Even on Windows machines!
 
-
-
-
-jobs:
-  - job: FirstJob
-    variables:  # job-level
-      JOB_VAR: 'a job var'
-    steps:
-    - script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR)
+- script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR)
