@@ -8,7 +8,10 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+  
+variables:      # pipeline-level
+  MY_VAR: 'my value'
+  ANOTHER_VAR: 'another value'
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -17,3 +20,18 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- bash: |
+    apk install wget -y
+    echo This multiline script always runs in Bash.
+    echo Even on Windows machines!
+stages:
+- stage: Build
+  variables:    # stage-level
+    STAGE_VAR: 'that happened'
+
+  jobs:
+  - job: FirstJob
+    variables:  # job-level
+      JOB_VAR: 'a job var'
+    steps:
+    - script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR)
