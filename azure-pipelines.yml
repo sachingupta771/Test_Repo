@@ -27,5 +27,6 @@ steps:
     apk install wget -y
     echo This multiline script always runs in Bash.
     echo Even on Windows machines!
+    echo $ABC
 
 - script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR)
