@@ -29,4 +29,4 @@ steps:
     echo This multiline script always runs in Bash.
     echo Even on Windows machines!
     echo $ABC
-- script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR) $(abc) 
+- script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR) $(abcd) 
