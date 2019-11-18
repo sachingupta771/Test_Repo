@@ -23,11 +23,10 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script again '
-    echo see this var $(abc).
+    
 - bash: |
     apk install wget -y
     echo This multiline script always runs in Bash.
     echo Even on Windows machines!
     echo $ABC
-
-- script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR)
+- script: echo $(MY_VAR) $(STAGE_VAR) $(JOB_VAR) $(abc) 
